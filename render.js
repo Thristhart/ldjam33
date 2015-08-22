@@ -23,6 +23,31 @@ Renderer.loadImages = function() {
     })
 }
 
+Renderer.tweenList = {};
+
+Renderer.tween = function(objectName, key, from, to, duration, interval) {
+    // pure evil
+    var object = eval(objectName);
+    interval = interval || 100;
+    var current = 0;
+    object[key] = from;
+    Renderer.tweenList[objectName] = Renderer.tweenList[objectName] || {};
+    if(Renderer.tweenList[objectName][key]) {
+        clearInterval(Renderer.tweenList[objectName][key]);
+        delete Renderer.tweenList[objectName][key];
+    }
+    var intervalID = setInterval(function() {
+        var diff = (to - from) * (current / duration);
+        object[key] = from + diff;
+        if(current >= duration) {
+            object[key] = to;
+            clearInterval(intervalID);
+        }
+        current += interval;
+    }, interval);
+    Renderer.tweenList[objectName][key] = intervalID;
+};
+
 Renderer.draw = function(time) {
     if(!time) {
         time = window.performance.now();

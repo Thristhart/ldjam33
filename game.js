@@ -24,8 +24,8 @@ Game.update = function(time) {
   
   var dist = Game.handDistance + Images["pointing-finger"].width;
   
-  if(Input.mouseDown) {
-    dist -= 100;
+  if(Game.pokeDistance) {
+    dist -= Game.pokeDistance;
   }
   
   var targetDiffX = Math.cos(Game.handAngle) * dist;
@@ -35,10 +35,18 @@ Game.update = function(time) {
   Game.handX = Input.mouseX - targetDiffX;
   Game.handY = Input.mouseY - targetDiffY;
   
+  if(Game.handX < 422) {
+    Game.handX = 422;
+  }
+  if(Game.handX > 503) {
+    Game.handX = 503;
+  }
+  
 };
 
 Game.onClickDown = function() {
-  
+  Renderer.tween(Game, "pokeDistance", 0, 100, 200, 10);
 };
 Game.onClickUp = function() {
+  Renderer.tween(Game, "pokeDistance", Game.pokeDistance, 0, 200, 10);
 };
