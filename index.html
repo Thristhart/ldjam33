@@ -8,14 +8,28 @@
       <canvas id="display" width=900 height=600>
         If you're seeing this, use a modern browser that supports canvas elements!
       </canvas>
+      <div class="ui" id="stats">
+        <h3>T H E O R B</h3>
+        <span id="foodLabel">Full</span>
+        <progress value=100 max=100 id="food"></progress>
+        <span id="waterLabel">Hydrated</span>
+        <progress value=100 max=100 id="water"></progress>
+      </div>
     </div>
     <div id="images">
       <img src="images/pointing-finger.svg" id="pointing-finger" />
       <img src="images/jar.png" id="jar" />
+      <img src="images/jar_back.png" id="jar_back" />
+    </div>
+    <div id="audio">
+      <audio src="audio/glass_rub3.ogg" id="glass-rub"></audio>
+      <audio src="audio/glass_thud.ogg" id="glass-thud"></audio>
     </div>
     <script src="main.js"></script>
     <script src="input.js"></script>
     <script src="render.js"></script>
+    <script src="audio.js"></script>
     <script src="game.js"></script>
+    <script src="monster.js"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 #gameContainer {
-  /* Maximize space that the canvas uses on the sceren */
+  /* Maximize space that the canvas uses on the screen */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -15,14 +15,39 @@
   width: 100%;
   height: 100%;
   
-  background-color: cornflowerblue;
+  /*background-color: cornflowerblue;*/
   background-image: url('images/background-no-jar.png');
   
   background-size: 100%;
   
-  /*cursor: none;*/
+  cursor: none;
 }
 
 #images {
   display: none;
+}
+
+.ui {
+  cursor: default;
+  opacity: 0.3;
+  transition: opacity 200ms linear;
+}
+.ui:hover {
+  opacity: 1;
+}
+#stats {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 10%;
+  height: 30%;
+  background-color: white;
+}
+#food {
+}
+progress::-webkit-progress-bar { background: #fff; }
+progress::-webkit-progress-value { background: #0063a6; }
+#foodLabel, #waterLabel {
+  position: absolute;
 }

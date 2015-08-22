@@ -21,7 +21,7 @@ Renderer.loadImages = function() {
         canvas.getContext("2d").drawImage(image, 0, 0);
         Images[image.id] = canvas;
     })
-}
+};
 
 Renderer.tweenList = {};
 
@@ -58,6 +58,12 @@ Renderer.draw = function(time) {
     var context = Renderer.context;
     
     context.clearRect(0, 0, Renderer.canvas.width, Renderer.canvas.height);
+    context.drawImage(Images["jar_back"], 0, 0);
+    
+    Game.entities.forEach(function(entity) {
+        entity.think(time);
+        entity.draw(time);
+    })
     
     Renderer.drawImageWithAngle(Images["pointing-finger"], 
         Game.handX, Game.handY,

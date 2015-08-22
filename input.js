@@ -12,6 +12,7 @@ Input.setup = function() {
 };
 
 Input.onMouseMove = function(event) {
+  Game.hasHovered = true;
   var target = event.target || e.srcElement,
       rect = target.getBoundingClientRect(),
       offsetX = event.clientX - rect.left,
