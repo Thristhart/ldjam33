@@ -16,11 +16,11 @@
   height: 100%;
   
   background-color: cornflowerblue;
-  background-image: url('images/background.png');
+  background-image: url('images/background-no-jar.png');
   
   background-size: 100%;
   
-  cursor: none;
+  /*cursor: none;*/
 }
 
 #images {

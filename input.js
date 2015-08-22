@@ -21,14 +21,14 @@ Input.onMouseMove = function(event) {
   Input.mouseX = Math.round((offsetX / rect.width) * Renderer.canvas.width);
   Input.mouseY = Math.round((offsetY / rect.height) * Renderer.canvas.height);
   
-  // Eliminate perceived unresponsiveness by drawing as soon as the mouse moves, so the cursor doesn't seem to lag behind
-  Renderer.draw();
 };
 
 Input.onClickDown = function(event) {
   Input.mouseDown = true;
+  Game.onClickDown();
 };
 
 Input.onClickUp = function(event) {
   Input.mouseDown = false;
+  Game.onClickUp();
 };
