@@ -23,12 +23,13 @@ Game.update = function(time) {
   
   var dist = Game.handDistance + Images["pointing-finger"].width;
   
+  if(Input.mouseDown) {
+    dist -= 100;
+  }
+  
   var targetDiffX = Math.cos(Game.handAngle) * dist;
   var targetDiffY = Math.sin(Game.handAngle) * dist;
   
-  if(Input.mouseDown) {
-    targetDiffY -= 100;
-  }
   
   Game.handX = Input.mouseX - targetDiffX;
   Game.handY = Input.mouseY - targetDiffY;
