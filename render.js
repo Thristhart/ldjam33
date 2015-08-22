@@ -1,3 +1,4 @@
+/* global Images Input Renderer Game */
 var Renderer = {};
 
 var Images = {};
@@ -24,7 +25,7 @@ Renderer.loadImages = function() {
 
 Renderer.draw = function(time) {
     if(!time) {
-        time = performance.now();
+        time = window.performance.now();
     }
     
     Game.update(time);
@@ -40,7 +41,7 @@ Renderer.draw = function(time) {
         
     context.drawImage(Images["jar"], 0, 0);
     
-    requestAnimationFrame(Renderer.draw);
+    window.requestAnimationFrame(Renderer.draw);
 }
 
 Renderer.drawImageWithAngle = function(image, x, y, centerX, centerY, angle) {

@@ -1,3 +1,4 @@
+/* global Images Input Renderer Game */
 var Game = {};
 
 Game.handX = 0;
