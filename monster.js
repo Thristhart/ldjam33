@@ -1,4 +1,4 @@
-/* global Images Input Renderer Game */
+/* global Images Input Renderer Game Water */
 var Monster = function() {
     this.x = Renderer.canvas.width / 2;
     this.y = Renderer.canvas.height / 2;
@@ -18,6 +18,8 @@ var Monster = function() {
     
     this.idleStateChangeTime = 0;
     this.timeToNextIdleStateChange = 100;
+    
+    this.bubble = false;
 };
 
 Monster.prototype.draw = function(time) {
@@ -25,6 +27,14 @@ Monster.prototype.draw = function(time) {
         this.x - this.radius, 
         this.y - 100 * 2, 
         this.animationFrame, this.frameCount + 1, this.direction > 0);
+    if(this.bubble) {
+        Renderer.drawFrameFromImage(Images["bubbles"],
+            this.bubbleX,
+            this.bubbleY,
+            this.bubbleFrame,
+            2
+        );
+    }
 };
 
 Monster.prototype.think = function(time) {
@@ -128,6 +138,11 @@ Monster.prototype.think = function(time) {
         }
     }
     
+    if(this.water<95)
+    {
+        this.drink();
+    }
+    
     
     this.food -= 0.002;
     this.water -= 0.008;
@@ -166,4 +181,12 @@ Monster.prototype.die = function() {
     dieBox.style.left = (canW/10)*4 + "px";
     
     this.state = "dead";
+}
+
+Monster.prototype.drink = function () {
+    var level = Water.getLevel();
+    if(level>75)  {
+        Water.setLevel(level - 5);
+        this.water += 5;
+    }
 }

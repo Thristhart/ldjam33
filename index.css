@@ -87,6 +87,7 @@
 }
 
 #nameBox {
+  left: 0;
   width: 100%;
   box-sizing: border-box;
   background-color: #FF99FF;
@@ -118,6 +119,10 @@ progress::-webkit-progress-bar {
 
 #water::-webkit-progress-value {
     background-color: cornflowerblue;
+}
+
+#water::-moz-progress-bar {
+  background-color: cornflowerblue;
 }
 
 #foodLabel, #waterLabel {

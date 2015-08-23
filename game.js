@@ -24,8 +24,15 @@ Game.jarStillTime = 0;
 Game.setup = function() {
   Game.entities.push(new Monster());
   Game.physicsEngine = Matter.Engine.create({});
-  var ground = Matter.Bodies.rectangle(107, Renderer.canvas.height - 33, 670, 10, {isStatic: true});
-  Matter.World.add(Game.physicsEngine.world, [ground]);
+  var ground = Matter.Bodies.rectangle(107 + 670 / 2, Renderer.canvas.height, 670, 100, {isStatic: true});
+  var leftWall = Matter.Bodies.rectangle(77, Renderer.canvas.height / 2, 100, Renderer.canvas.height * 2, {isStatic: true});
+  var rightWall = Matter.Bodies.rectangle(137 + 670, Renderer.canvas.height / 2, 100, Renderer.canvas.height * 2, {isStatic: true});
+  
+  var eggWall = Matter.Bodies.rectangle(687, 450, 100, 20, {isStatic: true, angle: -Math.PI / 4 - 0.4});
+  var eggWallRight = Matter.Bodies.rectangle(712, 280, 10, 140, {isStatic: true});
+  var eggWallLeft = Matter.Bodies.rectangle(630, 280, 10, 140, {isStatic: true});
+  
+  Matter.World.add(Game.physicsEngine.world, [ground, leftWall, rightWall, eggWall, eggWallLeft, eggWallRight]);
   
   Game.lastTime = performance.now();
 };
@@ -84,23 +91,43 @@ Game.update = function(time) {
   
   var distFromFoodButton = Math.sqrt(foodDiffX * foodDiffX + foodDiffY * foodDiffY);
   
+  var isAButtonPressed = false;
   if(distFromWaterButton < 32 || (Game.poking && Game.waterButtonDown)) {
     if(Game.poking) {
+      if(!Game.waterButtonDown) {
+        Audio["clunk-in"].play();
+      }
       Game.waterButtonDown = true;
       handTargetX = waterButtonX;
       handTargetY = waterButtonY;
       touching = false;
+      Audio["pour-con"].playOnce();
+      isAButtonPressed = true;
     }
   }
   else if(distFromFoodButton < 32 || (Game.poking && Game.foodButtonDown)) {
     if(Game.poking) {
+      if(!Game.foodButtonDown) {
+        Audio["clunk-in"].play();
+      }
       Game.foodButtonDown = true;
       handTargetX = foodButtonX;
       handTargetY = foodButtonY;
       touching = false;
+      isAButtonPressed = true;
     }
   }
-  else {
+  if(!isAButtonPressed) {
+    if(Game.foodButtonDown) {
+      Audio["clunk-out"].play();
+      if(Food.count < 40) {
+        Game.entities.push(new Food(677, 250));
+      }
+    }
+    if(Game.waterButtonDown) {
+      Audio["clunk-out"].play();
+      Audio["pour-con"].stop();
+    }
     Game.waterButtonDown = false;
     Game.foodButtonDown = false;
   }
@@ -109,11 +136,13 @@ Game.update = function(time) {
   Game.handTargetY = handTargetY;
   
   Game.entities.forEach(function(ent) {
-    if(ent.intersects(handTargetX, handTargetY)) {
-      ent.touch();
-    }
-    else {
-      ent.endTouch();
+    if(ent.intersects) {
+      if(ent.intersects(handTargetX, handTargetY)) {
+        ent.touch();
+      }
+      else {
+        ent.endTouch();
+      }
     }
   })
   
@@ -195,7 +224,7 @@ Game.update = function(time) {
   }
   Water.update(time);
   
-  Matter.Engine.update(Game.physicsEngine, deltaTime);
+  Matter.Engine.update(Game.physicsEngine, 16.67);
 };
 
 Game.onClickDown = function() {

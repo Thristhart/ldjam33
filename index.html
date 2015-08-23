@@ -9,7 +9,7 @@
         If you're seeing this, use a modern browser that supports canvas elements!
       </canvas>
       <div class="ui" id="stats">
-        <input type="text" id="nameBox" value="small blob friend"></input>
+        <input type="text" id="nameBox" value="small blob friend"></input><br/>
         <span id="foodLabel">Full</span>
         <progress value=100 max=100 id="food"></progress>
         <span id="waterLabel">Hydrated</span>
@@ -40,10 +40,15 @@
       <img src="images/food_pink.png" id="food_pink" />
       <img src="images/food_white.png" id="food_white" />
       <img src="images/food_yellow.png" id="food_yellow" />
+      <img src="images/bubbles.png" id="bubbles" />
+      <img src="images/monster_bend.png" id="monster_bend" />
     </div>
     <div id="audio">
       <audio src="audio/glass_rub3.ogg" id="glass-rub"></audio>
       <audio src="audio/glass_thud.ogg" id="glass-thud"></audio>
+      <audio src="audio/clunk_out.ogg" id="clunk-out"></audio>
+      <audio src="audio/clunk_in.ogg" id="clunk-in"></audio>
+      <audio src="audio/pour_con_long.ogg" id="pour-con"></audio>
     </div>
     <script src="main.js"></script>
     <script src="input.js"></script>
@@ -53,5 +58,6 @@
     <script src="monster.js"></script>
     <script src="water.js"></script>
     <script src="matter.js"></script>
+    <script src="food.js"></script>
   </body>
 </html>
