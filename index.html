@@ -14,6 +14,8 @@
         <progress value=100 max=100 id="food"></progress>
         <span id="waterLabel">Hydrated</span>
         <progress value=100 max=100 id="water"></progress>
+        <hr />
+        <a href="" id="about">About game</a>
       </div>
       <div class ="ui" id="dieBox">
         You died!<br/>
@@ -22,6 +24,20 @@
       <div class ="ui" id="healthBox">
         <span id="healthLabel">Health</span>
         <progress value=100 max=100 id="health"></progress>
+      </div>
+      <div class="ui" id="aboutBox" style="display: none;">
+        <h3>small blob friend</h3>
+        <a href="" id="aboutClose">&#x274c;</a>
+        <p>This game is awesome. Made by
+           <a href="http://ludumdare.com/compo/author/thristhart/">Thristhart</a>,
+           <a href="https://github.com/Zyrconium">Zyrconium</a>,
+           <a href="http://doktorgilda.deviantart.com/">DoktorGilda</a>, and
+           <a href="https://evaryont.me">Evaryont</a>.</p>
+        <p>Thanks for the following assets</p>
+        <ul>
+          <li>glass rub sound</li>
+          <li>tab sound</li>
+        </ul>
       </div>
     </div>
     <div id="images">
@@ -59,5 +75,6 @@
     <script src="water.js"></script>
     <script src="matter.js"></script>
     <script src="food.js"></script>
+    <script src="ui.js"></script>
   </body>
 </html>

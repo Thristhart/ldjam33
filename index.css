@@ -58,6 +58,29 @@
   background-color: red;
 }
 
+#aboutBox {
+  position: absolute;
+  display: none;
+  margin: auto;
+  width: 50%;
+  height: auto;
+  text-align: center;
+  font-size: 20px;
+  background-color: #CA8187;
+  opacity: 1;
+}
+
+#aboutBox h3 {
+  font-variant: small-caps;
+}
+
+#aboutClose {
+  position: absolute;
+  right: 1em;
+  top: 0.5em;
+  color: black;
+  text-decoration: none;
+}
 
 .ui {
     -webkit-touch-callout: none;
