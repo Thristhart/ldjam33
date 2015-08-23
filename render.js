@@ -65,11 +65,17 @@ Renderer.draw = function(time) {
         entity.draw(time);
     })
     
+    context.drawImage(Images["water_dispenser"], 0, 0);
+    context.drawImage(Images["feeder"], 0, 0);
+    
     Renderer.drawImageWithAngle(Images["pointing-finger"], 
         Game.handX, Game.handY,
-        -5, 40,
+        -3, 20,
         Game.handAngle);
         
+    
+    Water.draw();
+    
     context.drawImage(Images["jar"], 0, 0);
     
     window.requestAnimationFrame(Renderer.draw);
@@ -82,3 +88,9 @@ Renderer.drawImageWithAngle = function(image, x, y, centerX, centerY, angle) {
     Renderer.context.rotate(-angle);
     Renderer.context.translate(-x, -y);
 }
+
+Renderer.drawFrameFromImage = function(image, x, y, frameNum, totalFrames) {
+    var frameWidth = image.width / totalFrames;
+    var frameX = frameWidth * frameNum;
+    Renderer.context.drawImage(image, frameX, 0, frameWidth, image.height, x, y, frameWidth, image.height);
+};

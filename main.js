@@ -3,6 +3,7 @@ function onReady() {
   Input.setup();
   Audio.loadAudio();
   Game.setup();
+  Water.setup();
   
   Renderer.draw();
 }

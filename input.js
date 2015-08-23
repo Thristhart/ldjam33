@@ -9,6 +9,7 @@ Input.setup = function() {
   Renderer.canvas.addEventListener("mousemove", Input.onMouseMove);
   Renderer.canvas.addEventListener("mousedown", Input.onClickDown);
   Renderer.canvas.addEventListener("mouseup",   Input.onClickUp);
+  document.getElementById("restart").addEventListener("click", Input.onClickRestart)
 };
 
 Input.onMouseMove = function(event) {
@@ -21,7 +22,6 @@ Input.onMouseMove = function(event) {
   // The mouse position as if the canvas was 900 x 600
   Input.mouseX = Math.round((offsetX / rect.width) * Renderer.canvas.width);
   Input.mouseY = Math.round((offsetY / rect.height) * Renderer.canvas.height);
-  
 };
 
 Input.onClickDown = function(event) {
@@ -33,3 +33,7 @@ Input.onClickUp = function(event) {
   Input.mouseDown = false;
   Game.onClickUp();
 };
+
+Input.onClickRestart = function(event) {
+  location.reload();
+}

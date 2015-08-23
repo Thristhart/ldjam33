@@ -56,8 +56,8 @@ Game.update = function(time) {
     handTargetX = 766;
     touching = true;
   }
-  if(handTargetY > 573) {
-    handTargetY = 573;
+  if(handTargetY > 553) {
+    handTargetY = 553;
     touching = true;
   }
   
@@ -128,6 +128,14 @@ Game.update = function(time) {
   
   Game.lastTargetX = handTargetX;
   Game.lastTargetY = handTargetY;
+  
+  
+  var closestWaterNode = Water.nearestNode(handTargetX, handTargetY);
+  if(closestWaterNode && closestWaterNode.y < handTargetY) {
+    closestWaterNode.y = handTargetY;
+    closestWaterNode.doNotUpdate = true;
+  }
+  Water.update(time);
 };
 
 Game.onClickDown = function() {
@@ -135,4 +143,39 @@ Game.onClickDown = function() {
 };
 Game.onClickUp = function() {
   Renderer.tween("Game", "pokeDistance", Game.pokeDistance, 0, 200, 10);
+};
+
+Game.setFood = function(newFood) {
+  var state;
+  if(newFood > 75) {
+    state = "Full";
+  }
+  else if(newFood > 50) {
+    state = "Peckish";
+  }
+  else if(newFood > 25) {
+    state = "Hungry";
+  }
+  else {
+    state = "Starving";
+  }
+  document.getElementById("foodLabel").innerHTML = state;
+  document.getElementById("food").value = newFood;
+};
+Game.setWater = function(newWater) {
+  var state;
+  if(newWater > 75) {
+    state = "Hydrated";
+  }
+  else if(newWater > 50) {
+    state = "Parched";
+  }
+  else if(newWater > 25) {
+    state = "Thirsty";
+  }
+  else {
+    state = "Dehydrated";
+  }
+  document.getElementById("waterLabel").innerHTML = state;
+  document.getElementById("water").value = newWater;
 };

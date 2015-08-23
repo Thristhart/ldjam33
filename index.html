@@ -9,17 +9,25 @@
         If you're seeing this, use a modern browser that supports canvas elements!
       </canvas>
       <div class="ui" id="stats">
-        <h3>T H E O R B</h3>
+        <input type="text" id="nameBox" value="small blob friend"></input>
         <span id="foodLabel">Full</span>
         <progress value=100 max=100 id="food"></progress>
         <span id="waterLabel">Hydrated</span>
         <progress value=100 max=100 id="water"></progress>
       </div>
+    <div class ="ui" id="dieBox">
+      You died!<br/>
+      <input type="button" id="restart" value="Restart"></input>
+    </div>
     </div>
     <div id="images">
       <img src="images/pointing-finger.svg" id="pointing-finger" />
       <img src="images/jar.png" id="jar" />
       <img src="images/jar_back.png" id="jar_back" />
+      <img src="images/monster_idle.png" id="monster_idle" />
+      <img src="images/monster_happy.png" id="monster_happy" />
+      <img src="images/water_dispenser.png" id="water_dispenser" />
+      <img src="images/feeder.png" id="feeder" />
     </div>
     <div id="audio">
       <audio src="audio/glass_rub3.ogg" id="glass-rub"></audio>
@@ -31,5 +39,6 @@
     <script src="audio.js"></script>
     <script src="game.js"></script>
     <script src="monster.js"></script>
+    <script src="water.js"></script>
   </body>
 </html>
