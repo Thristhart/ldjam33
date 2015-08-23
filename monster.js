@@ -15,10 +15,16 @@ var Monster = function() {
     this.water = 100;
     this.health = 100;
     this.dead = false;
+    
+    this.idleStateChangeTime = 0;
+    this.timeToNextIdleStateChange = 100;
 };
 
 Monster.prototype.draw = function(time) {
-    Renderer.drawFrameFromImage(Images["monster_" + this.state], this.x - this.radius, this.y - 100 * 2, this.animationFrame, this.frameCount + 1);
+    Renderer.drawFrameFromImageWithFlip(Images["monster_" + this.state], 
+        this.x - this.radius, 
+        this.y - 100 * 2, 
+        this.animationFrame, this.frameCount + 1, this.direction > 0);
 };
 
 Monster.prototype.think = function(time) {
@@ -39,25 +45,22 @@ Monster.prototype.think = function(time) {
         this.direction *= -1;
     }
     
-    if(this.touched) {
-        this.state = "happy";
-    }
-    else {
-        this.state = "idle";
-    }
-    
     var timePerFrame = 300;
-    
-    if(this.animationFrame == 3 && this.state === "idle") {
-        timePerFrame = 200;
-    }
     
     var frameMax = 4;
     if(this.state == "happy" || this.state == "idle") {
         frameMax = 3;
     }
     
+    if(this.state == "sad") {
+        frameMax = 1;
+    }
+    if(this.state == "dead") {
+        frameMax = 0;
+    }
+    
     this.frameCount = frameMax;
+    
     
     var diff = time - this.lastFrameTime;
     if(diff > timePerFrame) {
@@ -74,15 +77,55 @@ Monster.prototype.think = function(time) {
         this.dead = true;
     }
     
+    if(this.health<100 && this.health>0)
+    {
+        Game.showHealth(true);
+        this.state = "sad";
+    }
+    else
+    {
+        Game.showHealth(false);
+    }
+    
+    if(this.state === "idle") {
+        // randomly wander around
+        
+        if(time - this.idleStateChangeTime > this.timeToNextIdleStateChange) {
+            this.idleStateChangeTime = time;
+            this.timeToNextIdleStateChange = Math.round(Math.random() * 3000);
+            if(Math.random() * 100 < 20) {
+                this.direction *= -1;
+            }
+            if(Math.random() * 100 < 50) {
+                this.velocity = 1;
+            }
+            else {
+                this.velocity = 0;
+            }
+        }
+    }
+    else {
+        this.velocity = 0;
+    }
+    
     if(this.food <= 0)
     {
         this.food = 0;
         this.health -= 0.06;
     }
+    
     if(this.water <= 0)
     {
         this.water = 0;
-        this.health -= 0.6;
+        this.health -= 0.12;
+    }
+    
+    if(this.food > 0 && this.water > 0)
+    {
+        this.health += 0.06;
+        if(this.health>100) {
+            this.health=100;
+        }
     }
     
     
@@ -90,6 +133,7 @@ Monster.prototype.think = function(time) {
     this.water -= 0.008;
     Game.setFood(this.food);
     Game.setWater(this.water);
+    Game.setHealth(this.health);
 };
 
 Monster.prototype.touch = function() {
@@ -97,14 +141,6 @@ Monster.prototype.touch = function() {
         this.touched = true;
         this.touchStart = performance.now();
         
-        var diffX = Game.handTargetX - this.x;
-        var diffY = Game.handTargetY - this.y;
-        if(diffX > 0) {
-            this.direction = -1;
-        }
-        else {
-            this.direction = 1;
-        }
     }
 };
 
@@ -122,11 +158,12 @@ Monster.prototype.intersects = function(x, y) {
 };
 
 Monster.prototype.die = function() {
-    console.log("You Died!");
     var dieBox = document.getElementById("dieBox");
     var canH = document.getElementById("gameContainer").getBoundingClientRect().height;
     var canW = document.getElementById("gameContainer").getBoundingClientRect().width;
     dieBox.style.display = "block";
     dieBox.style.top = (canH/10)*4 + "px";
     dieBox.style.left = (canW/10)*4 + "px";
+    
+    this.state = "dead";
 }

@@ -1,4 +1,4 @@
-/* global Images Input Renderer Game */
+/* global Matter Monster Images Input Renderer Game */
 var Game = {};
 
 Game.entities = [];
@@ -23,9 +23,16 @@ Game.jarStillTime = 0;
 
 Game.setup = function() {
   Game.entities.push(new Monster());
+  Game.physicsEngine = Matter.Engine.create({});
+  var ground = Matter.Bodies.rectangle(107, Renderer.canvas.height - 33, 670, 10, {isStatic: true});
+  Matter.World.add(Game.physicsEngine.world, [ground]);
+  
+  Game.lastTime = performance.now();
 };
 
 Game.update = function(time) {
+  var deltaTime = time - Game.lastTime;
+  Game.lastTime = time;
   Game.handX = Renderer.canvas.width / 2;
   Game.handY = 0;
   
@@ -59,6 +66,43 @@ Game.update = function(time) {
   if(handTargetY > 553) {
     handTargetY = 553;
     touching = true;
+  }
+  
+  var waterButtonX = 220;
+  var waterButtonY = 386;
+  
+  var foodButtonX = 650;
+  var foodButtonY = 403;
+  
+  var waterDiffX = waterButtonX - handTargetX;
+  var waterDiffY = waterButtonY - handTargetY;
+  
+  var distFromWaterButton = Math.sqrt(waterDiffX * waterDiffX + waterDiffY * waterDiffY);
+  
+  var foodDiffX = foodButtonX - handTargetX;
+  var foodDiffY = foodButtonY - handTargetY;
+  
+  var distFromFoodButton = Math.sqrt(foodDiffX * foodDiffX + foodDiffY * foodDiffY);
+  
+  if(distFromWaterButton < 32 || (Game.poking && Game.waterButtonDown)) {
+    if(Game.poking) {
+      Game.waterButtonDown = true;
+      handTargetX = waterButtonX;
+      handTargetY = waterButtonY;
+      touching = false;
+    }
+  }
+  else if(distFromFoodButton < 32 || (Game.poking && Game.foodButtonDown)) {
+    if(Game.poking) {
+      Game.foodButtonDown = true;
+      handTargetX = foodButtonX;
+      handTargetY = foodButtonY;
+      touching = false;
+    }
+  }
+  else {
+    Game.waterButtonDown = false;
+    Game.foodButtonDown = false;
   }
   
   Game.handTargetX = handTargetX;
@@ -131,18 +175,36 @@ Game.update = function(time) {
   
   
   var closestWaterNode = Water.nearestNode(handTargetX, handTargetY);
-  if(closestWaterNode && closestWaterNode.y < handTargetY) {
+  if(closestWaterNode && closestWaterNode.y <= handTargetY && handTargetY - Water.level < 40) {
     closestWaterNode.y = handTargetY;
     closestWaterNode.doNotUpdate = true;
   }
+  var spoutX = 267;
+  var spoutY = 110;
+  if(Game.waterButtonDown) {
+    var level = Water.getLevel();
+    if(level < 420) {
+      Water.setLevel(level + 0.3);
+      if(level < 83) {
+        var fillNode = Water.nearestNode(spoutX, level);
+        fillNode.y = Renderer.canvas.height - spoutY;
+        fillNode.x = spoutX;
+        fillNode.doNotUpdate = true;
+      }
+    }
+  }
   Water.update(time);
+  
+  Matter.Engine.update(Game.physicsEngine, deltaTime);
 };
 
 Game.onClickDown = function() {
   Renderer.tween("Game", "pokeDistance", 0, 100, 200, 10);
+  Game.poking = true;
 };
 Game.onClickUp = function() {
   Renderer.tween("Game", "pokeDistance", Game.pokeDistance, 0, 200, 10);
+  Game.poking = false;
 };
 
 Game.setFood = function(newFood) {
@@ -179,3 +241,18 @@ Game.setWater = function(newWater) {
   document.getElementById("waterLabel").innerHTML = state;
   document.getElementById("water").value = newWater;
 };
+Game.setHealth = function(newHealth) {
+  document.getElementById("health").value = newHealth;
+};
+Game.showHealth = function(show) {
+  if(show===true) {
+    document.getElementById("healthBox").style.display = "block";
+    var canH = document.getElementById("gameContainer").getBoundingClientRect().height;
+    var canW = document.getElementById("gameContainer").getBoundingClientRect().width;
+    document.getElementById("healthBox").style.top = (canH/10)*4 + "px";
+    document.getElementById("healthBox").style.left = (canW/4) + "px";
+  }
+  if(show===false) {
+    document.getElementById("healthBox").style.display = "none";
+  }
+}

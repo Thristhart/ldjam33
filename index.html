@@ -15,10 +15,14 @@
         <span id="waterLabel">Hydrated</span>
         <progress value=100 max=100 id="water"></progress>
       </div>
-    <div class ="ui" id="dieBox">
-      You died!<br/>
-      <input type="button" id="restart" value="Restart"></input>
-    </div>
+      <div class ="ui" id="dieBox">
+        You died!<br/>
+        <input type="button" id="restart" value="Restart"></input>
+      </div>
+      <div class ="ui" id="healthBox">
+        <span id="healthLabel">Health</span>
+        <progress value=100 max=100 id="health"></progress>
+      </div>
     </div>
     <div id="images">
       <img src="images/pointing-finger.svg" id="pointing-finger" />
@@ -26,8 +30,16 @@
       <img src="images/jar_back.png" id="jar_back" />
       <img src="images/monster_idle.png" id="monster_idle" />
       <img src="images/monster_happy.png" id="monster_happy" />
+      <img src="images/monster_sad.png" id="monster_sad" />
+      <img src="images/monster_dead.png" id="monster_dead" />
       <img src="images/water_dispenser.png" id="water_dispenser" />
       <img src="images/feeder.png" id="feeder" />
+      <img src="images/ball.png" id="ball" />
+      <img src="images/food_blue.png" id="food_blue" />
+      <img src="images/food_green.png" id="food_green" />
+      <img src="images/food_pink.png" id="food_pink" />
+      <img src="images/food_white.png" id="food_white" />
+      <img src="images/food_yellow.png" id="food_yellow" />
     </div>
     <div id="audio">
       <audio src="audio/glass_rub3.ogg" id="glass-rub"></audio>
@@ -40,5 +52,6 @@
     <script src="game.js"></script>
     <script src="monster.js"></script>
     <script src="water.js"></script>
+    <script src="matter.js"></script>
   </body>
 </html>

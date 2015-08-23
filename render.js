@@ -68,6 +68,7 @@ Renderer.draw = function(time) {
     context.drawImage(Images["water_dispenser"], 0, 0);
     context.drawImage(Images["feeder"], 0, 0);
     
+    
     Renderer.drawImageWithAngle(Images["pointing-finger"], 
         Game.handX, Game.handY,
         -3, 20,
@@ -93,4 +94,22 @@ Renderer.drawFrameFromImage = function(image, x, y, frameNum, totalFrames) {
     var frameWidth = image.width / totalFrames;
     var frameX = frameWidth * frameNum;
     Renderer.context.drawImage(image, frameX, 0, frameWidth, image.height, x, y, frameWidth, image.height);
+};
+
+Renderer.drawFrameFromImageWithFlip = function(image, x, y, frameNum, totalFrames, flip) {
+    
+    var frameWidth = image.width / totalFrames;
+    var frameX = frameWidth * frameNum;
+    
+    var scale = 1;
+    if(flip) {
+        scale = -1;
+        x += frameWidth;
+    }
+    Renderer.context.translate(x, y);
+    Renderer.context.scale(scale, 1);
+    
+    Renderer.context.drawImage(image, frameX, 0, frameWidth, image.height, 0, 0, frameWidth, image.height);
+    Renderer.context.scale(scale, 1);
+    Renderer.context.translate(-x, -y);
 };

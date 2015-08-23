@@ -17,11 +17,11 @@
   height: 100%;
   
   /*background-color: cornflowerblue;*/
-  background-image: url('images/background-no-jar.png');
+  background-image: url('images/background.png');
   
   background-size: 100%;
   
-  /*cursor: none;*/
+  cursor: none;
 }
 
 #images {
@@ -38,6 +38,26 @@
   font-size: 20px;
   background-color: #CA8187;
 }
+
+#healthBox {
+  position: absolute;
+  display: none;
+  margin: auto;
+  width: 50%;
+  height: auto;
+  text-align: center;
+  font-size: 20px;
+  background-color: #CA8187;
+  opacity: 1;
+}
+
+#health::-webkit-progress-value {
+  background-color: red;
+}
+#health::-moz-progress-bar {
+  background-color: red;
+}
+
 
 .ui {
     -webkit-touch-callout: none;
@@ -103,4 +123,9 @@ progress::-webkit-progress-bar {
 #foodLabel, #waterLabel {
   position: absolute;
   left: 0;
+}
+
+#healthLabel {
+  position: absolute;
+  left: 45%;
 }
