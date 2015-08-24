@@ -39,7 +39,7 @@ body {
 }
 
 #gravestone {
-  /* display: none; */
+  display: none;
   position: absolute;
   width: 10vmax;
   height: 10vmax;
