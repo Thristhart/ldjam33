@@ -14,6 +14,7 @@ body {
   max-width: 150vh;
   max-height: 100vh;
   margin: auto;
+  overflow: hidden;
 }
 
 #display {
