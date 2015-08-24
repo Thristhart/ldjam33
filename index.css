@@ -37,6 +37,8 @@ body {
   width: 20%;
   height: 8%;
   z-index: 470;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
 #gravestone {
@@ -81,6 +83,8 @@ body {
   opacity: 1;
   border-radius: 8px;
   box-shadow: 0px 0px 2px 5px #333;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #healthBox {
@@ -115,13 +119,7 @@ body {
     -ms-user-select: none;
     user-select: none;
   cursor: default;
-  opacity: 0.5;
-  transition: opacity 200ms linear;
   position: relative;
-}
-
-.ui:hover {
-  opacity: 1;
 }
 
 #stats {
@@ -214,4 +212,12 @@ progress::-webkit-progress-bar {
 #healthLabel {
   position: absolute;
   left: 45%;
+}
+
+/* always have the same color for links. They are few & far between enough that
+   it shouldn't be too confusing. */
+a, a:hover, a:visited, a:focus {
+  text-decoration: underline;
+  color: #2319CF;
+  border: none;
 }
