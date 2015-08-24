@@ -303,7 +303,7 @@ Monster.prototype.updateAnimation = function(time) {
 
 Monster.prototype.touch = function() {
     if(Game.poking) {
-        if(!this.poked) {
+        if(!this.poked && !this.state === "dead") {
             this.poked = true;
             this.touchStart = performance.now();
             console.log("touched", Game.poking);
