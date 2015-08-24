@@ -173,13 +173,8 @@ Monster.prototype.intersects = function(x, y) {
 };
 
 Monster.prototype.die = function() {
-    var dieBox = document.getElementById("dieBox");
-    var canH = document.getElementById("gameContainer").getBoundingClientRect().height;
-    var canW = document.getElementById("gameContainer").getBoundingClientRect().width;
-    dieBox.style.display = "block";
-    dieBox.style.top = (canH/10)*4 + "px";
-    dieBox.style.left = (canW/10)*4 + "px";
-    
+    document.getElementById("dieLabel").innerHTML = this.name + " died! :("
+    UI.showBox("dieBox");
     this.state = "dead";
 }
 
