@@ -3,6 +3,19 @@ UI = {}
 UI.setup = function() {
   document.getElementById("about").addEventListener("click", UI.toggleAbout);
   document.getElementById("aboutClose").addEventListener("click", UI.hideAbout);
+  
+  // Check for a bunch of HTML5 features we use in the game, alerting the user
+  // if their browser isn't supported
+  if (!Modernizr.audio.ogg ||
+      !Modernizr.fontface ||
+      !Modernizr.canvas ||
+      !Modernizr.svg ||
+      !Modernizr.borderradius ||
+      !Modernizr.textshadow ||
+      !Modernizr.opacity ||
+      !Modernizr.cssgradients) {
+    UI.toggleBox("browserAlert");
+  }
 }
 
 UI.toggleAbout = function(event) {

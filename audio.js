@@ -9,12 +9,25 @@ Audio.loadAudio = function() {
                 newElement.play();
             },
             playOnce: function() {
-                audioElement.play();
+                if (Audio.isReady(audioElement)) {
+                    audioElement.play();
+                }
             },
             stop: function() {
-                audioElement.currentTime = 0;
-                audioElement.pause();
+                if (Audio.isReady(audioElement)) {
+                    audioElement.currentTime = 0;
+                    audioElement.pause();
+                }
             }
         }
 	});
 };
+
+Audio.isReady = function(audioElement) {
+  if (audioElement.readyState === 0) {
+    console.log("audio element " + audioElement.id + " is not ready");
+    return false;
+  } else {
+    return true;
+  }
+}
