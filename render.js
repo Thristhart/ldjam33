@@ -60,14 +60,19 @@ Renderer.draw = function(time) {
     context.clearRect(0, 0, Renderer.canvas.width, Renderer.canvas.height);
     context.drawImage(Images["jar_back"], 0, 0);
     
-    Game.entities.forEach(function(entity) {
+    Game.entities.forEach(function(entity, index) {
+        if(index == 0) {
+            return;
+        }
         entity.think(time);
         entity.draw(time);
-    })
+    });
     
     context.drawImage(Images["water_dispenser"], 0, 0);
     context.drawImage(Images["feeder"], 0, 0);
     
+    Game.entities[0].think(time);
+    Game.entities[0].draw(time);
     
     Renderer.drawImageWithAngle(Images["pointing-finger"], 
         Game.handX, Game.handY,
@@ -97,7 +102,6 @@ Renderer.drawFrameFromImage = function(image, x, y, frameNum, totalFrames) {
 };
 
 Renderer.drawFrameFromImageWithFlip = function(image, x, y, frameNum, totalFrames, flip) {
-    
     var frameWidth = image.width / totalFrames;
     var frameX = frameWidth * frameNum;
     

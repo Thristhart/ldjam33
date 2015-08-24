@@ -1,11 +1,11 @@
-/* global Matter Monster Images Input Renderer Game */
+/* global Matter Monster Images Input Renderer Game Water */
 var Food = function(x, y) {
     this.x = x;
     this.y = y;
     this.color = "pink";
 
     
-    this.body = Matter.Bodies.circle(this.x, this.y, 30);
+    this.body = Matter.Bodies.circle(this.x, this.y, 20);
     Matter.World.add(Game.physicsEngine.world, [this.body]);
     
     Food.count++;
@@ -19,24 +19,27 @@ var Food = function(x, y) {
 
 
 Food.prototype.draw = function() {
-    Renderer.drawImageWithAngle(Images["food_" + this.color], this.x, this.y, 50, 50, this.body.angle);
+    var y = this.y;
+    if(Math.abs(y - Water.level) < 2 && Math.abs(this.lastY - this.y) < 2) {
+        y = this.lastY;
+    }
+    Renderer.drawImageWithAngle(Images["food_" + this.color], this.x, y, 30, 30, this.body.angle);
+    this.lastY = y;
 };
 
 Food.prototype.think = function() {
-    this.x = this.body.position.x;
-    this.y = this.body.position.y;
+    this.x = Math.round(this.body.position.x);
+    this.y = Math.round(this.body.position.y);
     
-    var force = 1;
-    if(this.y > Water.level) {
-        if(Water.level - this.y) {
-            force = 0.1;
-        }
-        Matter.Body.setVelocity(this.body, {x:0, y:-1});
+    var nearest =  Water.nearestNode(this.x, this.y);
+    if(this.y > nearest.y) {
+        Matter.Body.setVelocity(this.body, {x:this.body.velocity.x, y:-0.7});
     }
 };
 
 Food.prototype.destroy = function() {
     Matter.World.remove(Game.physicsEngine.world, [this.body]);
+    Game.entities.splice(Game.entities.indexOf(this), 1);
     Food.count--;
 }
 

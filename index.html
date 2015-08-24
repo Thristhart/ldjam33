@@ -17,14 +17,15 @@
       <div class="ui" id="stats">
         <span id="name">
           <i class="fa fa-pencil editIcon"></i>
-          <input type="text" id="nameBox" value="small blob friend"></input><br/>
+          <input type="text" id="nameBox" value="click to set name"></input><br/>
         </span>
         <span id="foodLabel">Full</span>
         <progress value=100 max=100 id="food"></progress>
         <span id="waterLabel">Hydrated</span>
         <progress value=100 max=100 id="water"></progress>
         <hr />
-        <a href="" id="about">About game</a>
+        <a href="" id="about">About</a><br />
+        <a href="" id="soundToggle">Disable sound</a>
       </div>
       <div class ="ui" id="dieBox">
         <span id="dieLabel">small blob friend died! :(</span><br/>
@@ -59,6 +60,9 @@
       <img src="images/monster_happy.png" id="monster_happy" />
       <img src="images/monster_sad.png" id="monster_sad" />
       <img src="images/monster_dead.png" id="monster_dead" />
+      <img src="images/monster_bend.png" id="monster_bend" />
+      <img src="images/monster_eating.png" id="monster_eating" />
+      <img src="images/monster_sad_bend.png" id="monster_sad_bend" />
       <img src="images/water_dispenser.png" id="water_dispenser" />
       <img src="images/feeder.png" id="feeder" />
       <img src="images/ball.png" id="ball" />
@@ -68,7 +72,6 @@
       <img src="images/food_white.png" id="food_white" />
       <img src="images/food_yellow.png" id="food_yellow" />
       <img src="images/bubbles.png" id="bubbles" />
-      <img src="images/monster_bend.png" id="monster_bend" />
     </div>
     <div id="audio">
       <audio src="audio/glass_rub3.ogg" id="glass-rub"></audio>
@@ -76,6 +79,12 @@
       <audio src="audio/clunk_out.ogg" id="clunk-out"></audio>
       <audio src="audio/clunk_in.ogg" id="clunk-in"></audio>
       <audio src="audio/pour_con_long.ogg" id="pour-con"></audio>
+      <audio src="audio/ChirpyPoke.ogg" id="monster_poke_1"></audio>
+      <audio src="audio/PurryPoke.ogg" id="monster_poke_2"></audio>
+      <audio src="audio/ContentPoke.ogg" id="monster_poke_3"></audio>
+      <audio src="audio/onDrink.ogg" id="monster_drink"></audio>
+      <audio src="audio/onEat.ogg" id="monster_eat"></audio>
+      <audio src="audio/Thirsty.ogg" id="monster_thirsty"></audio>
     </div>
     <script src="main.js"></script>
     <script src="input.js"></script>

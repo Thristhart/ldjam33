@@ -29,7 +29,7 @@ Game.setup = function() {
   var rightWall = Matter.Bodies.rectangle(137 + 670, Renderer.canvas.height / 2, 100, Renderer.canvas.height * 2, {isStatic: true});
   
   var eggWall = Matter.Bodies.rectangle(687, 450, 100, 20, {isStatic: true, angle: -Math.PI / 4 - 0.4});
-  var eggWallRight = Matter.Bodies.rectangle(712, 280, 10, 140, {isStatic: true});
+  var eggWallRight = Matter.Bodies.rectangle(712, 280, 10, 180, {isStatic: true});
   var eggWallLeft = Matter.Bodies.rectangle(630, 280, 10, 140, {isStatic: true});
   
   Matter.World.add(Game.physicsEngine.world, [ground, leftWall, rightWall, eggWall, eggWallLeft, eggWallRight]);
@@ -73,6 +73,9 @@ Game.update = function(time) {
   if(handTargetY > 553) {
     handTargetY = 553;
     touching = true;
+  }
+  if(handTargetY < 100) {
+    handTargetY = 100;
   }
   
   var waterButtonX = 220;
@@ -135,17 +138,18 @@ Game.update = function(time) {
   Game.handTargetX = handTargetX;
   Game.handTargetY = handTargetY;
   
-  Game.entities.forEach(function(ent) {
-    if(ent.intersects) {
-      if(ent.intersects(handTargetX, handTargetY)) {
-        ent.touch();
+  if(!isAButtonPressed) {
+    Game.entities.forEach(function(ent) {
+      if(ent.intersects) {
+        if(ent.intersects(handTargetX, handTargetY)) {
+          ent.touch();
+        }
+        else {
+          ent.endTouch();
+        }
       }
-      else {
-        ent.endTouch();
-      }
-    }
-  })
-  
+    })
+  }
   
   if(touching && Game.hasHovered) {
     var stillOnJar = false;
@@ -204,7 +208,7 @@ Game.update = function(time) {
   
   
   var closestWaterNode = Water.nearestNode(handTargetX, handTargetY);
-  if(closestWaterNode && closestWaterNode.y <= handTargetY && handTargetY - Water.level < 40) {
+  if(closestWaterNode && closestWaterNode.y <= handTargetY && Math.abs(handTargetY - Water.level) < 40) {
     closestWaterNode.y = handTargetY;
     closestWaterNode.doNotUpdate = true;
   }
