@@ -221,3 +221,11 @@ a, a:hover, a:visited, a:focus {
   color: #2319CF;
   border: none;
 }
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: black;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: black;
+   opacity: 1;
+}
