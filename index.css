@@ -38,6 +38,32 @@ body {
   z-index: 470;
 }
 
+#gravestone {
+  position: absolute;
+  width: 13vw;
+  height: 13vw;
+  background-image: url('images/gravestone.png');
+  right: 0;
+  bottom: 0;
+  background-size: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 2.5vw;
+  padding-right: 3vw;
+  padding-left: 3vw;
+  word-wrap: break-word;
+  font-family: serif;
+  letter-spacing: 0.2em;
+  font-size: 1.2vw;
+}
+#gravestone #deadMonster {
+  padding-top: 0.7vw;
+  display: block;
+  height: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #aboutBox, #healthBox, #dieBox, #browserAlert {
   position: absolute;
   display: none;
