@@ -39,27 +39,31 @@ body {
 }
 
 #gravestone {
+  /* display: none; */
   position: absolute;
-  width: 13vw;
-  height: 13vw;
+  width: 10vmax;
+  height: 10vmax;
+  max-width: 13%;
+  max-height: 21%;
   background-image: url('images/gravestone.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
   right: 0;
   bottom: 0;
-  background-size: 100%;
   text-align: center;
   box-sizing: border-box;
-  padding-top: 2.5vw;
-  padding-right: 3vw;
-  padding-left: 3vw;
+  padding-top: 2%;
+  padding-right: 3%;
+  padding-left: 3%;
   word-wrap: break-word;
   font-family: serif;
-  letter-spacing: 0.2em;
-  font-size: 1.2vw;
+  letter-spacing: 0.15rem;
+  font-size: 0.6rem;
 }
 #gravestone #deadMonster {
-  padding-top: 0.7vw;
+  padding-top: 5%;
   display: block;
-  height: 80%;
+  height: 73%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
