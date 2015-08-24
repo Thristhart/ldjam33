@@ -1,4 +1,5 @@
 function onReady() {
+  UI.setup();
   Renderer.setup();
   Input.setup();
   Audio.loadAudio();
@@ -7,6 +8,5 @@ function onReady() {
   
   Renderer.draw();
 }
-
 
 window.addEventListener("load", onReady)

@@ -10,6 +10,7 @@ Input.setup = function() {
   Renderer.canvas.addEventListener("mousedown", Input.onClickDown);
   Renderer.canvas.addEventListener("mouseup",   Input.onClickUp);
   document.getElementById("restart").addEventListener("click", Input.onClickRestart)
+  document.getElementById("nameBox").addEventListener("change", Input.onNameChange)
 };
 
 Input.onMouseMove = function(event) {
@@ -26,6 +27,7 @@ Input.onMouseMove = function(event) {
 
 Input.onClickDown = function(event) {
   Input.mouseDown = true;
+  UI.hideAbout();
   Game.onClickDown();
 };
 
@@ -36,4 +38,8 @@ Input.onClickUp = function(event) {
 
 Input.onClickRestart = function(event) {
   location.reload();
+}
+
+Input.onNameChange = function(event) {
+  Game.entities[0].name = event.target.value;
 }

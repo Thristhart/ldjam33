@@ -1,4 +1,4 @@
-UI = {}
+UI = {};
 
 UI.setup = function() {
   document.getElementById("about").addEventListener("click", UI.toggleAbout);
@@ -18,16 +18,38 @@ UI.setup = function() {
   }
 }
 
-UI.toggleAbout = function(event) {
-  console.log("toggling about box");
-  var aboutBox = document.getElementById("aboutBox");
-  aboutBox.style.display = (aboutBox.style.display == 'none' ? 'block' : 'none');
-  
+UI.toggleBox = function(elementId) {
+  var elementBox = document.getElementById(elementId);
+  if (elementBox.style.display === 'none') {
+    UI.showBox(elementId);
+  } else {
+    UI.hideBox(elementId);
+  }
+}
+
+UI.showBox = function(elementId) {
+  var elementBox = document.getElementById(elementId);
+  if (element.style.display === 'none') {
+    console.log("showing dialog box " + elementId);
+  }
+  elementBox.style.display = 'block';
   // Set the about box's width/height
   var canH = document.getElementById("gameContainer").getBoundingClientRect().height;
   var canW = document.getElementById("gameContainer").getBoundingClientRect().width;
-  document.getElementById("aboutBox").style.top = (canH/10)*4 + "px";
-  document.getElementById("aboutBox").style.left = (canW/4) + "px";
+  elementBox.style.top = (canH/10)*4 + "px";
+  elementBox.style.left = (canW/4) + "px";
+}
+
+UI.hideBox = function(elementId) {
+  element = document.getElementById(elementId)
+  if (element.style.display !== 'none') {
+    console.log("hiding dialog box " + elementId);
+    document.getElementById(elementId).style.display = 'none';
+  }
+}
+
+UI.toggleAbout = function(event) {
+  UI.toggleBox("aboutBox")
 
   // Cancel the default click event 
   event.preventDefault();
@@ -35,7 +57,8 @@ UI.toggleAbout = function(event) {
 }
 
 UI.hideAbout = function(event) {
-  document.getElementById("aboutBox").style.display = 'none';
+  UI.hideBox("aboutBox")
+  
   if (event) {
     // Cancel the default click event 
     event.preventDefault();

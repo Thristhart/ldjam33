@@ -250,7 +250,7 @@ Game.setFood = function(newFood) {
   else {
     state = "Starving";
   }
-  document.getElementById("foodLabel").innerHTML = state;
+  document.getElementById("foodLabel").innerHTML = "<i class='fa fa-cutlery fa-fw'></i>" + state;
   document.getElementById("food").value = newFood;
 };
 Game.setWater = function(newWater) {
@@ -267,21 +267,9 @@ Game.setWater = function(newWater) {
   else {
     state = "Dehydrated";
   }
-  document.getElementById("waterLabel").innerHTML = state;
+  document.getElementById("waterLabel").innerHTML = "<i class='fa fa-tint fa-fw'></i>" + state;
   document.getElementById("water").value = newWater;
 };
 Game.setHealth = function(newHealth) {
   document.getElementById("health").value = newHealth;
 };
-Game.showHealth = function(show) {
-  if(show===true) {
-    document.getElementById("healthBox").style.display = "block";
-    var canH = document.getElementById("gameContainer").getBoundingClientRect().height;
-    var canW = document.getElementById("gameContainer").getBoundingClientRect().width;
-    document.getElementById("healthBox").style.top = (canH/10)*4 + "px";
-    document.getElementById("healthBox").style.left = (canW/4) + "px";
-  }
-  if(show===false) {
-    document.getElementById("healthBox").style.display = "none";
-  }
-}

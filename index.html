@@ -2,14 +2,23 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    
+    <title>Small Blob Friend!</title>
+    <meta charset="utf-8" /> 
   </head>
   <body>
+    <noscript>This game requires Javascript to function.
+    Please it turn on and enjoy!</noscript>
     <div id="gameContainer">
       <canvas id="display" width=900 height=600>
         If you're seeing this, use a modern browser that supports canvas elements!
       </canvas>
       <div class="ui" id="stats">
-        <input type="text" id="nameBox" value="small blob friend"></input><br/>
+        <span id="name">
+          <i class="fa fa-pencil editIcon"></i>
+          <input type="text" id="nameBox" value="small blob friend"></input><br/>
+        </span>
         <span id="foodLabel">Full</span>
         <progress value=100 max=100 id="food"></progress>
         <span id="waterLabel">Hydrated</span>
