@@ -335,7 +335,7 @@ Monster.prototype.intersects = function(x, y) {
 
 Monster.prototype.die = function() {
     localStorage.setItem("monster_name", this.name);
-    document.getElementById("dieLabel").innerHTML = this.name + " died! :("
+    document.getElementById("dieLabel").innerHTML = "You let " + this.name + " die! :( Are you the monster?";
     UI.showBox("dieBox");
     this.state = "dead";
 }
