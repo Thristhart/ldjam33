@@ -147,7 +147,7 @@ Monster.prototype.think = function(time) {
         var distX = foodTarget.x - this.x;
         var distY = foodTarget.y - (this.y - this.radius + 20);
         var distance = Math.sqrt(distX * distX + distY * distY);
-        if(distance < 50) {
+        if(distance < 100) {
             this.state = "eating";
             this.framesInCurrentState = 0;
             this.animationFrame = 0;
