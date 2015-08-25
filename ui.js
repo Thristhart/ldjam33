@@ -4,6 +4,7 @@ UI.setup = function() {
   document.getElementById("about").addEventListener("click", UI.toggleAbout);
   document.getElementById("soundToggle").addEventListener("click", UI.toggleSound);
   document.getElementById("aboutClose").addEventListener("click", UI.hideAbout);
+  window.addEventListener("resize", UI.onResize);
   
   // Check for a bunch of HTML5 features we use in the game, alerting the user
   // if their browser isn't supported
@@ -17,7 +18,12 @@ UI.setup = function() {
       !Modernizr.cssgradients) {
     UI.toggleBox("browserAlert");
   }
+  UI.onResize();
 }
+
+UI.onResize = function(event) {
+  document.body.style.fontSize = document.getElementById("gameContainer").getBoundingClientRect().width * 0.01 + "px";
+};
 
 UI.toggleBox = function(elementId) {
   var elementBox = document.getElementById(elementId);
