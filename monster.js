@@ -303,10 +303,9 @@ Monster.prototype.updateAnimation = function(time) {
 
 Monster.prototype.touch = function() {
     if(Game.poking) {
-        if(!this.poked && !this.state === "dead") {
+        if(!this.poked && this.state != "dead") {
             this.poked = true;
             this.touchStart = performance.now();
-            console.log("touched", Game.poking);
             var pokeSound = this.lastPokeSound;
             while(pokeSound == this.lastPokeSound) {
                 pokeSound = "monster_poke_" + Math.ceil(Math.random() * 3);
