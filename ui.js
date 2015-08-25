@@ -58,11 +58,11 @@ UI.toggleAbout = function(event) {
 UI.toggleSound = function(event) {
   if(Audio.enabled) {
     Audio.enabled = false;
-    document.getElementById("soundToggle").innerHTML = "<i class='fa fa-volume-off fa-fw'></i>Sound: Disabled"
+    document.getElementById("soundToggle").innerHTML = "<i class='fa fa-volume-off fa-fw'></i>Disabled"
   }
   else {
     Audio.enabled = true;
-    document.getElementById("soundToggle").innerHTML = "<i class='fa fa-volume-up fa-fw'></i>Sound: Enabled"
+    document.getElementById("soundToggle").innerHTML = "<i class='fa fa-volume-up fa-fw'></i>Enabled"
   }
 
   // Cancel the default click event 
